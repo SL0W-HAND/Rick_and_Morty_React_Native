@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import MainScreen from './MainScreen'
-import PersonageDetails from '../personage/PersonageDetail'
+import CharacterDetail from '../personage/CharacterDetail'
 
 const Stack =  createStackNavigator()
 
@@ -9,7 +9,7 @@ const MainStack = () => {
  return(
      <Stack.Navigator>
         <Stack.Screen name='personage' component={MainScreen}/>
-        <Stack.Screen name='Personage Detail' component={PersonageDetails}/>
+        <Stack.Screen name='CharacterDetail' component={CharacterDetail}/>
      </Stack.Navigator>
  )
 }

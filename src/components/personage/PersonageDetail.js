@@ -1,15 +1,19 @@
 import React, { Component } from 'react'
-import{View, Text} from'react-native'
-export class PersonageDetail extends Component {
-    render() {
+import{View, Text, Pressable} from'react-native'
+const PersonageDetail = (item) => {
+    
+    var character = item.item
         return (
             <View>
                 <Text>
-                    detail chatracters
+                    {character.name}
+                </Text>
+                <Text>
+                {character.status}
                 </Text>
             </View>
         )
-    }
+    
 }
 
 export default PersonageDetail
