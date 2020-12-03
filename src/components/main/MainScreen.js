@@ -21,7 +21,7 @@ componentDidMount = async () => {
 }
 
 handlePress = (character) =>{
-    this.props.navigation.navigate('CharacterDetail')
+    this.props.navigation.navigate('CharacterDetail',{character})
 }
 
     render() {
@@ -42,9 +42,9 @@ handlePress = (character) =>{
                     data={characters}
                     keyExtractor={item => item.name.toString()}
                     renderItem={({ item }) =>
-                    <PersonageDetail item={item}/>
+                    <PersonageDetail onPress={() => this.handlePress(item)} item={item}/>
                     }
-                    
+                    renderSectionHeader={({section: {title}}) => <Text>{'lol'}</Text>}  
                 />
             </View>
         )

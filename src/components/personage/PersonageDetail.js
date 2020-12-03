@@ -1,19 +1,17 @@
-import React, { Component } from 'react'
-import{View, Text, Pressable} from'react-native'
-const PersonageDetail = (item) => {
-    
-    var character = item.item
-        return (
-            <View>
-                <Text>
-                    {character.name}
-                </Text>
-                <Text>
-                {character.status}
-                </Text>
-            </View>
-        )
-    
+import React, { Component } from 'react';
+import{View, Text, Pressable} from'react-native';
+
+const PersonageDetail = ({item, onPress}) => {  
+    return (
+        <Pressable onPress={onPress}>
+            <Text>
+                {item.name}
+            </Text>
+            <Text>
+                {item.status}
+            </Text>
+        </Pressable>
+    )
 }
 
 export default PersonageDetail
