@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import{View, Text, Pressable} from'react-native';
 
-const PersonageDetail = ({item, onPress}) => {  
+const CharacterItem = ({item, onPress}) => {  
     return (
         <Pressable onPress={onPress}>
             <Text>
@@ -14,4 +14,4 @@ const PersonageDetail = ({item, onPress}) => {
     )
 }
 
-export default PersonageDetail
+export default CharacterItem
