@@ -10,7 +10,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Tabs.Navigator>
-  <Tabs.Screen name='main' component={MainStack}/>
+    <Tabs.Screen name='main' component={MainStack}/>
 
     <Tabs.Screen 
       name='favorites' 

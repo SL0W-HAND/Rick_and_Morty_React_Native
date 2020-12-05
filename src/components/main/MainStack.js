@@ -10,7 +10,7 @@ const Stack =  createStackNavigator()
 const MainStack = () => {
  return(
      <Stack.Navigator>
-        <Stack.Screen name='personage' component={MainScreen}/>
+        <Stack.Screen name='Characters' component={MainScreen}/>
         <Stack.Screen name='CharacterDetail'  component={CharacterDetail}/>
      </Stack.Navigator>
  )

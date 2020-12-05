@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {View,Text, Pressable, FlatList, ActivityIndicator} from 'react-native'
+import {View,Text, Pressable, FlatList, ActivityIndicator, StyleSheet} from 'react-native'
 import Http from 'Rick_and_Morty_Api/src/libs/http'
 import CharacterItem from '../characters/CharacterItem'
 
@@ -23,12 +23,13 @@ export class MainScreen extends Component {
     render() {
         const {characters, loading} = this.state
         return (
-            <View>
+            <View style={styles.container}>
                 {loading ? 
                     <ActivityIndicator color="white" size="large"/>
                 :null
                 }
-                <FlatList
+                <FlatList 
+                    numColumns={2}
                     data={characters}
                     keyExtractor={item => item.name.toString()}
                     renderItem={({ item }) =>
@@ -37,9 +38,16 @@ export class MainScreen extends Component {
                             item={item}/>
                     }
                 />
+               
             </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container:{
+        alignItems:"center"
+    }
+})
 
 export default MainScreen

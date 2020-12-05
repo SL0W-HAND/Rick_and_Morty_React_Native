@@ -65,9 +65,10 @@ export class CharcaterDetail extends Component {
         return (
             <View>
             <Text>ffhfh</Text>
-        <Pressable onPress={this.toogleFavorite}>
-        <Text>{isFavorite?"remove": "add to fav"}</Text>
-        </Pressable>
+                
+                <Pressable onPress={this.toogleFavorite}>
+                <Text>{isFavorite?"remove": "add to fav"}</Text>
+                </Pressable>
         </View>
             )
     }
