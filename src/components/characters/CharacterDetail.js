@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {View, Text, Pressable} from 'react-native'
+import {View, Text, Pressable,StyleSheet, Image } from 'react-native'
 import Storage from 'Rick_and_Morty_Api/src/libs/storage'
 
 export class CharcaterDetail extends Component {
@@ -7,7 +7,6 @@ export class CharcaterDetail extends Component {
     state = {
         character:{},
         isFavorite:false
-
     }
 
     toogleFavorite = () => {
@@ -48,30 +47,43 @@ export class CharcaterDetail extends Component {
           }
     }
 
-    componentDidMount(){
-
-        const char = this.props.route.params.character
-        //console.log(this.props.route.params.character)
-        console.log(char.name)
-       // this.props.navigation.setOptions({title:'lol'})
-        this.props.navigation.setOptions({ title: char.name })
-        this.setState({character:char}, () => {
+    getCharacter(){
+        const character = this.props.route.params.character
+        this.props.navigation.setOptions({ title: character.name })
+        this.setState({character:character}, () => {
             this.getFavorite()
         })
-        
     }
+
+    componentDidMount(){
+        this.getCharacter()
+    }
+
     render() {
-        const {isFavorite} = this.state
+        const {isFavorite, character} = this.state
+        console.log(character)
         return (
             <View>
-            <Text>ffhfh</Text>
-                
+                <View></View>
+                <View>
+                <Image
+                style={styles.image}
+               source={{ uri: character.image }}
+                />
+                </View>
                 <Pressable onPress={this.toogleFavorite}>
                 <Text>{isFavorite?"remove": "add to fav"}</Text>
                 </Pressable>
-        </View>
-            )
+            </View>
+        )
     }
 }
+
+const styles = StyleSheet.create({
+ image:{
+     height:145,
+     width:145
+ }
+})
 
 export default CharcaterDetail
