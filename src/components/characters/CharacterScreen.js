@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import {View,Text, Pressable, FlatList, ActivityIndicator, StyleSheet} from 'react-native'
 import Http from 'Rick_and_Morty_Api/src/libs/http'
-import CharacterItem from '../characters/CharacterItem'
+import CharacterItem from '../items/CharacterItem'
 
-export class MainScreen extends Component {
+export class CharacterScreen extends Component {
   
     state = {
         characters:[],
@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default MainScreen
+export default CharacterScreen

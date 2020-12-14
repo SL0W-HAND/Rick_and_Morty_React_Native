@@ -2,15 +2,15 @@ import React, { Component } from 'react'
 import {Image} from 'react-native'
 
 import { createStackNavigator } from '@react-navigation/stack'
-import MainScreen from './MainScreen'
-import CharacterDetail from '../characters/CharacterDetail'
+import CharacterScreen from './CharacterScreen'
+import CharacterDetail from './CharacterDetail'
 
 const Stack =  createStackNavigator()
 
-const MainStack = () => {
+const CharacterStack = () => {
  return(
      <Stack.Navigator>
-        <Stack.Screen name='Characters' component={MainScreen}/>
+        <Stack.Screen name='Characters' component={CharacterScreen}/>
         <Stack.Screen name='CharacterDetail'  component={CharacterDetail}/>
      </Stack.Navigator>
  )
@@ -18,4 +18,4 @@ const MainStack = () => {
 
 
 
-export default MainStack
+export default CharacterStack
