@@ -35,10 +35,10 @@ export class CharacterScreen extends Component {
                     renderItem={({ item }) =>
                         <CharacterItem 
                             onPress={() => this.handlePress(item)} 
-                            item={item}/>
+                            item={item}
+                        />
                     }
                 />
-               
             </View>
         )
     }

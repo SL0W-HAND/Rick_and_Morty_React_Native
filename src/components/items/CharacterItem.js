@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import{View, Text, Pressable, StyleSheet, Image} from'react-native';
-import LinearGradient from 'react-native-linear-gradient' // import LinearGradient
+import{ Text, Pressable, StyleSheet, Image} from'react-native';
+import LinearGradient from 'react-native-linear-gradient' 
 
 
 const CharacterItem = ({item, onPress}) => {  
@@ -11,12 +11,12 @@ const CharacterItem = ({item, onPress}) => {
                 style={styles.image}
                 source={{
                     uri: item.image,
-                  }}
+                }}
             />
             <LinearGradient
-          colors={['transparent','black' ]}
-          style={styles.linearGradient}
-        ></LinearGradient>
+                colors={['transparent','black' ]}
+                style={styles.linearGradient}
+            />
             <Text style={styles.text}>
                 {item.name}
             </Text>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {Image} from 'react-native'
 
 import { createStackNavigator } from '@react-navigation/stack'
 import CharacterScreen from './CharacterScreen'
@@ -15,7 +14,5 @@ const CharacterStack = () => {
      </Stack.Navigator>
  )
 }
-
-
 
 export default CharacterStack
