@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import{ Text, Pressable, StyleSheet, Image} from'react-native';
-import LinearGradient from 'react-native-linear-gradient' 
+import LinearGradient from 'react-native-linear-gradient'; 
 
 
 const CharacterItem = ({item, onPress}) => {  

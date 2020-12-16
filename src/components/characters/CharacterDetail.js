@@ -30,12 +30,12 @@ export class CharcaterDetail extends Component {
             
             headerRight: () => (
                 <Icon
-                onPress={() => this.toogleFavorite()}
-                name={this.state.isFavorite?"heart":"heart-o"}
-                backgroundColor="transparent"
+                    onPress={() => this.toogleFavorite()}
+                    name={this.state.isFavorite?"heart":"heart-o"}
+                    backgroundColor="transparent"
                     color="black"
                     style={styles.headButton}
-            />  
+                />  
             )
         })
     }
@@ -48,7 +48,6 @@ export class CharcaterDetail extends Component {
             this.setState({ isFavorite: true });
         }
         this.props.navigation.setOptions({ 
-            
             headerRight: () => (
                 <Icon
                     onPress={() => this.toogleFavorite()}
@@ -76,20 +75,18 @@ export class CharcaterDetail extends Component {
           }
     }
 
-    
-
     getCharacter(){
         const character = this.props.route.params.character
         this.props.navigation.setOptions({ 
             title: character.name,
             headerRight: () => (
                 <Icon
-                onPress={() => this.toogleFavorite()}
-                name={this.state.isFavorite?"heart":"heart-o"}
-                backgroundColor="transparent"
-                color="black"
-                style={styles.headButton}
-            />  
+                    onPress={() => this.toogleFavorite()}
+                    name={this.state.isFavorite?"heart":"heart-o"}
+                    backgroundColor="transparent"
+                    color="black"
+                    style={styles.headButton}
+                />  
             )
         })
         this.setState({character:character, location:character.location, origin:character.origin, episodes:character.episodes}, () => {

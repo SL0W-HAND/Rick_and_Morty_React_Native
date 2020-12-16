@@ -2,8 +2,10 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CharacterStack from 'Rick_and_Morty_Api/src/components/characters/CharacterStack';
+import LocationStack from 'Rick_and_Morty_Api/src/components/locations/LocationStack';
 import FavoritesStack from 'Rick_and_Morty_Api/src/components/favorites/FavoritesStack';
 import {Image} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const Tabs = createBottomTabNavigator();
 //npx react-native run-android
@@ -25,6 +27,23 @@ const App = () => {
               />
             )
           }}
+        />
+
+        <Tabs.Screen
+          name='location'
+          component={LocationStack}
+          options={{
+            tabBarIcon: ({ size, color }) => (
+              <Icon
+                name='planet-outline'
+                backgroundColor="transparent"
+                color="black"
+               // style={{fontSize:20}}
+              />
+            )
+          }}
+
+
         />
 
         <Tabs.Screen 
