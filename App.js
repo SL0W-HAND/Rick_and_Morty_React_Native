@@ -38,7 +38,7 @@ const App = () => {
                 name='planet-outline'
                 backgroundColor="transparent"
                 color="black"
-               // style={{fontSize:20}}
+                style={{fontSize:20}}
               />
             )
           }}

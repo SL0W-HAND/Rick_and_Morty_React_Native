@@ -30,9 +30,10 @@ const styles = StyleSheet.create({
         display:"flex",
         flexDirection:"column",
         justifyContent:"flex-end",
-        marginVertical:"3%",
-        marginHorizontal:"1.2%",
+        marginVertical:5,
+        marginHorizontal:5,
         width:145,
+        height:145,
         position:"relative",
         borderRadius:50
     },

@@ -29,9 +29,10 @@ export class CharacterScreen extends Component {
                 :null
                 }
                 <FlatList 
+                    showsVerticalScrollIndicator ={false}
                     numColumns={2}
                     data={characters}
-                    keyExtractor={item => item.name.toString()}
+                    keyExtractor={item => item.id.toString()}
                     renderItem={({ item }) =>
                         <CharacterItem 
                             onPress={() => this.handlePress(item)} 
