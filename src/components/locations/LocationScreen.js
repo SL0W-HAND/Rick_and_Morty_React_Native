@@ -29,7 +29,7 @@ export class LocationScreen extends Component {
                 :null
                 }
                 <FlatList 
-                   
+                    showsVerticalScrollIndicator={false}
                     data={locations}
                     keyExtractor={item => item.name.toString()}
                     renderItem={({ item }) =>

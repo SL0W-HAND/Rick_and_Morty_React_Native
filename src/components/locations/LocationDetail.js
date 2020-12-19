@@ -58,62 +58,68 @@ export class LocationDetail extends Component {
     }
 
     render() {
-       const {location,residents,loading} = this.state
+        const {location,residents,loading} = this.state
         
         return (
-            <View>
+            <View style={styles.container}>
 
-                {loading?
-                 <ActivityIndicator color="blue" size="large"/>
-                 :
-                 <ScrollView>
-                    <Text>Type: {location.type}</Text>
-                    <Text>Dimension: {location.dimension}</Text>
-                    {residents.length == 0?
-                        <Text>Nobody lives here</Text>
-                    :
-                        <FlatList 
-                            showsHorizontalScrollIndicator={false}
-                            horizontal={true}
-                            data={residents}
-                            keyExtractor={item => item.id.toString()}
-                            renderItem={({ item }) =>
-                                <CharacterItem 
-                                    onPress={() => this.handlePress(item)} 
-                                    item={item}
-                                />
-                            }
+                {loading
+                    ?<ActivityIndicator 
+                            style={styles.loader} 
+                            color="blue" 
+                            size="large"
                         />
-                    }  
-                </ScrollView>
-                     
+                    :<ScrollView>
+                        <Text style={styles.text}>Type: {location.type}</Text>
+                        <Text style={styles.text}>Dimension: {location.dimension}</Text>
+                        {residents.length == 0
+                            ?<Text style={styles.text}>Nobody lives here</Text>
+                            :<View>
+                                <Text style={styles.text}>Residents:</Text>
+                                <FlatList 
+                                    showsHorizontalScrollIndicator={false}
+                                    style={{ marginLeft:15}}
+                                    horizontal={true}
+                                    data={residents}
+                                    keyExtractor={item => item.id.toString()}
+                                    renderItem={({ item }) =>
+                                        <CharacterItem 
+                                            onPress={() => this.handlePress(item)} 
+                                            item={item}
+                                        />
+                                    }
+                                />
+                            </View>
+                        }
+                        <Text style={styles.footer}>Created: {location.created}</Text>  
+                    </ScrollView>     
                 }
-               
-
-                </View>
+                
+            </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    list:{
-        maxHeight:300
+    container:{
+        flex:1
+    },
+    loader:{
+        marginTop:150
+    },
+    text:{
+        fontFamily:"Segoe UI",
+        fontSize:17,
+        marginLeft:15,
+        marginVertical:7
+    },
+    footer:{
+        position:'relative',
+        marginTop:60,
+        fontFamily:"Segoe UI",
+        fontSize:15,
+        marginLeft:15,
     }
 })
 
 export default LocationDetail
-/*
-<FlatList 
-                     
-                     data={residents}
-                     keyExtractor={item => item.id.toString()}
-                     renderItem={({ item }) =>
-                         <CharacterItem 
-                             onPress={() => this.handlePress(item)} 
-                             item={item}
-                         />
-                     }
-
-                    
-                 />
-*/
