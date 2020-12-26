@@ -54,14 +54,14 @@ export class EpisodeDetail extends Component {
             <View>
                {loading
                     ?<ActivityIndicator 
-                            
                             color="blue" 
                             size="large"
                         />
                     :<ScrollView>
-                            <Text>Air date {episode.air_date}</Text>
-                            <Text>Episode {episode.episode}</Text>
-                            <Text>Characters on this episode</Text>
+                            <Text style={styles.text}>Air date: {episode.air_date}</Text>
+                            <Text style={styles.text}>Season: {episode.episode.substr(1,2)}</Text>
+                            <Text style={styles.text}>Episode: {episode.episode.substr(4)}</Text>
+                            <Text style={styles.text}>Characters on this episode:</Text>
                             <FlatList 
                                     showsHorizontalScrollIndicator={false}
                                     style={{ marginLeft:15}}
@@ -83,7 +83,12 @@ export class EpisodeDetail extends Component {
 }
 
 const styles = StyleSheet.create({
-
+    text:{
+        fontFamily:"Segoe UI",
+        fontSize:17,
+        marginLeft:15,
+        marginVertical:7
+    }
 })
 
 export default EpisodeDetail

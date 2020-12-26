@@ -68,7 +68,7 @@ export class LocationDetail extends Component {
                             style={styles.loader} 
                             color="blue" 
                             size="large"
-                        />
+                     />
                     :<ScrollView>
                         <Text style={styles.text}>Type: {location.type}</Text>
                         <Text style={styles.text}>Dimension: {location.dimension}</Text>
