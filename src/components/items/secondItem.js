@@ -6,9 +6,10 @@ const secondItem = ({item, onPress}) => {
         <Pressable  onPress={onPress}>   
             <View style={styles.card}>
                 <Text style={styles.text}>{item.name}</Text>
-                {item.type?
-                <Text>      {item.type}</Text>
-                :null}
+                {item.type
+                    ?<Text>      {item.type}</Text>
+                    :false
+                }
             </View>    
         </Pressable>
     )

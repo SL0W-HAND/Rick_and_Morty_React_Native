@@ -1,36 +1,40 @@
 import React, { Component } from 'react'
+
 import {View, FlatList, ActivityIndicator, StyleSheet} from 'react-native'
 import Http from 'Rick_and_Morty_Api/src/libs/http'
 import SecondItem from '../items/SecondItem'
 
-export class LocationScreen extends Component {
-  
+
+export class EpisodesScreen extends Component {
+
     state = {
-        locations:[],
+        episodes:[],
         loading: false
     }
-    // get locations
+
+    //get episodes
     componentDidMount = async () => {
         this.setState({loading:true})
-        const res = await Http.instance.get("https://rickandmortyapi.com/api/location")
-        this.setState({locations : res.results, loading:false})
+        const res = await Http.instance.get("https://rickandmortyapi.com/api/episode")
+        this.setState({episodes : res.results, loading:false})
     }
 
-    handlePress = (location) =>{
-        this.props.navigation.navigate('LocationDetail',{location})
+    //navigate to episode detail
+    handlePress = (episode) =>{
+        this.props.navigation.navigate('EpisodeDetail',{episode})
     }
 
     render() {
-        const {locations, loading} = this.state
+        const {episodes, loading} = this.state
         return (
-            <View style={styles.container}>
+            <View>
                 {loading 
-                    ?<ActivityIndicator color="white" size="large"/>
+                    ? <ActivityIndicator color="blue" size="large"/>
                     :null
                 }
-                <FlatList 
+                 <FlatList 
                     showsVerticalScrollIndicator={false}
-                    data={locations}
+                    data={episodes}
                     keyExtractor={item => item.id.toString()}
                     renderItem={({ item }) =>
                         <SecondItem 
@@ -39,15 +43,10 @@ export class LocationScreen extends Component {
                         />
                     }
                 />
+            
             </View>
         )
     }
 }
 
-const styles = StyleSheet.create({
-    container:{
-        alignItems:"center"
-    }
-})
-
-export default LocationScreen
+export default EpisodesScreen

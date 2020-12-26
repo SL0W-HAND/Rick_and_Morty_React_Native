@@ -27,7 +27,7 @@ export class CharcaterDetail extends Component {
         await Storage.instance.remove(key)
         this.setState({isFavorite:false})
         this.props.navigation.setOptions({ 
-            
+            //icon to add favorite
             headerRight: () => (
                 <Icon
                     onPress={() => this.toogleFavorite()}
@@ -47,6 +47,7 @@ export class CharcaterDetail extends Component {
         if(stored) {
             this.setState({ isFavorite: true });
         }
+        //update icon of favorite
         this.props.navigation.setOptions({ 
             headerRight: () => (
                 <Icon
@@ -93,7 +94,7 @@ export class CharcaterDetail extends Component {
             this.getFavorite()
         })
     }
-
+    
     statusSwitch(status){
         switch(status) {
         case 'Alive':

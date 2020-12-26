@@ -9,13 +9,13 @@ export class CharacterScreen extends Component {
         characters:[],
         loading: false
     }
-
+    //get characters
     componentDidMount = async () => {
         this.setState({loading:true})
         const res = await Http.instance.get("https://rickandmortyapi.com/api/character/?page=19")
         this.setState({characters : res.results, loading:false})
     }
-
+    //navigate to detail of character
     handlePress = (character) =>{
         this.props.navigation.navigate('CharacterDetail',{character})
     }

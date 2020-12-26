@@ -13,33 +13,33 @@ export class LocationDetail extends Component {
 
     getLocation = async() => {
         const location = this.props.route.params.location
+        //header title with the name of the parameter when is press on the location screen
         this.props.navigation.setOptions({ 
             title: location.name,
         }) 
 
-        var residentes = location.residents
+        var citizen = location.residents
        
+        var getResidents = await new Promise((resolve, reject) => {
 
-        var test = await new Promise((resolve, reject) => {
-
-            var residents =[]
+            var residents = []
             var count = 0
-            if (residentes.length == 0) {
+            if (citizen.length == 0) {
                 this.setState({location:location ,residents: residents, loading:false})
                 resolve()
             } else {
-                residentes.forEach(async element => {
+                citizen.forEach(async element => {
                     const response =  await Http.instance.get(element)
                     residents.push(response)
                     count ++
-                    if(residentes.length == count ){
+                    if(citizen.length == count ){
                         this.setState({location:location ,residents: residents, loading:false})
                         resolve()
                     }
                 })
             }      
         })
-        test
+        getResidents
     }
 
     getCharacter = async (character) => {

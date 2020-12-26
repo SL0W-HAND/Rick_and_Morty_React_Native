@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CharacterStack from 'Rick_and_Morty_Api/src/components/characters/CharacterStack';
 import LocationStack from 'Rick_and_Morty_Api/src/components/locations/LocationStack';
 import FavoritesStack from 'Rick_and_Morty_Api/src/components/favorites/FavoritesStack';
+import EpisodesStack from 'Rick_and_Morty_Api/src/components/episodes/EpisodesStack'
 import {Image} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -42,8 +43,21 @@ const App = () => {
               />
             )
           }}
+        />
 
-
+        <Tabs.Screen
+          name='Episodes'
+          component={EpisodesStack}
+          options={{
+            tabBarIcon: ({ size, color }) => (
+              <Icon
+                name='film-outline'
+                backgroundColor="transparent"
+                color="black"
+                style={{fontSize:20}}
+              />
+            )
+          }}
         />
 
         <Tabs.Screen 
