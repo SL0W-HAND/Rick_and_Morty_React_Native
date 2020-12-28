@@ -9,7 +9,7 @@ import {Image} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const Tabs = createBottomTabNavigator();
-//npx react-native run-android
+
 const App = () => {
   return (
     <NavigationContainer>

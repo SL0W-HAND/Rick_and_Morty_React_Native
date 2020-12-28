@@ -9,14 +9,21 @@ export class EpisodesScreen extends Component {
 
     state = {
         episodes:[],
-        loading: false
+        loading: false,
+        loadingMore:false,
+        page:0,
+        quantityOfPages:0,
+        error:false
     }
 
-    //get episodes
-    componentDidMount = async () => {
-        this.setState({loading:true})
-        const res = await Http.instance.get("https://rickandmortyapi.com/api/episode")
-        this.setState({episodes : res.results, loading:false})
+    getEpisodes = async () => {
+        try {
+            this.setState({loading:true})
+            const res = await Http.instance.get("https://rickandmortyapi.com/api/episode")
+            this.setState({episodes : res.results, loading:false, page: 2, quantityOfPages: res.info.pages})
+        } catch (error) {
+            this.setState({error:true,loading:false})
+        }
     }
 
     //navigate to episode detail
@@ -24,10 +31,36 @@ export class EpisodesScreen extends Component {
         this.props.navigation.navigate('EpisodeDetail',{episode})
     }
 
+    handleLoadMore = async () => {
+        if (this.state.loadingMore) {
+            return null 
+        }else{
+            var page = this.state.page
+            try {
+                if ((page - 1) == this.state.quantityOfPages) {
+                    return null 
+                } else {
+                    this.setState({loadingMore: true})
+                    const res = await Http.instance.get('https://rickandmortyapi.com/api/episode?page=' + page.toString())
+                    page ++
+                    const plusNewEpisodes = this.state.episodes.concat(res.results)
+                    this.setState({episodes:plusNewEpisodes, page:page, loadingMore:false})
+                }
+            } catch (error) {
+                this.setState({loadingMore: false, error: true})
+                console.log(error)
+            }
+        }
+    }
+
+    componentDidMount(){
+        this.getEpisodes()
+    }
+
     render() {
-        const {episodes, loading} = this.state
+        const {episodes, loading, loadingMore, error} = this.state
         return (
-            <View>
+            <View style={styles.container}>
                 {loading 
                     ? <ActivityIndicator color="blue" size="large"/>
                     :null
@@ -35,6 +68,9 @@ export class EpisodesScreen extends Component {
                  <FlatList 
                     showsVerticalScrollIndicator={false}
                     data={episodes}
+                    initialNumToRender={20}
+                    onEndReached={this.handleLoadMore}
+                    onEndReachedThreshold={0.5}
                     keyExtractor={item => item.id.toString()}
                     renderItem={({ item }) =>
                         <SecondItem 
@@ -43,10 +79,30 @@ export class EpisodesScreen extends Component {
                         />
                     }
                 />
+                {loadingMore 
+                    ?<ActivityIndicator color="white" size="large"/>
+                    :null
+                }
+                {error 
+                    ?<Pressable onPress={this.getEpisodes}>
+                        <Icon
+                            name='reload'
+                            backgroundColor="transparent"
+                            color="black"
+                            style={{fontSize:35,marginTop:40}}
+                        />
+                    </Pressable>
+                    :null
+                }
             
             </View>
         )
     }
 }
+const styles = StyleSheet.create({
+    container:{
+        alignItems:"center"
+    }
+})
 
 export default EpisodesScreen
