@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {View, Text, Pressable,StyleSheet, Image, Button,ScrollView } from 'react-native'
+import {View, Text, StyleSheet, Image, ScrollView } from 'react-native'
 import Storage from 'Rick_and_Morty_Api/src/libs/storage'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import DotIcon from 'react-native-vector-icons/Octicons'
@@ -113,7 +113,7 @@ export class CharcaterDetail extends Component {
     }
 
     render() {
-        const {isFavorite, character, location,origin, episodes} = this.state
+        const {character, location, origin } = this.state
         
         return (
             <ScrollView>
@@ -127,13 +127,13 @@ export class CharcaterDetail extends Component {
                         <View>
                             <Text style={styles.text}>Status: {character.status}  <DotIcon name='primitive-dot' backgroundColor="transparent" color={this.statusSwitch(character.status)} style={{fontSize:20}}/></Text>
                             <Text style={styles.text}>Species: {character.species} </Text>
-                            {character.type == "" ?
-                                null
-                                :<Text style={styles.text}>Type: {character.type} </Text> 
+                            {character.type == "" 
+                                ? null
+                                : <Text style={styles.text}>Type: {character.type} </Text> 
                             }
                             <Text style={styles.text}>Gender: {character.gender} </Text>
                             <Text style={styles.text}>Origin: {origin.name} </Text>
-                            <Text style={styles.text}>Location: {location.name} </Text>
+                            <Text style={styles.text}>Last seen in: {location.name} </Text>
                         </View>
                 </View>
             </ScrollView>

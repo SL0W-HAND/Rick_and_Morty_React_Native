@@ -1,17 +1,19 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import{ Text, Pressable, StyleSheet, Image} from'react-native';
 import LinearGradient from 'react-native-linear-gradient'; 
 
 
-const CharacterItem = ({item, onPress}) => {  
+const CharacterItem = ({item, onPress}) => {
+    
+    const [loadedImg, setLoadedImg] = useState(false) 
     return (
         <Pressable  onPress={onPress} style={styles.card}>
            
             <Image
                 style={styles.image}
-                source={{
-                    uri: item.image,
-                }}
+                source={loadedImg ? {uri: item.image} : require('Rick_and_Morty_Api/src/assets/non-loaded.png')}
+                onLoadEnd={() => setLoadedImg(true)}
+                
             />
             <LinearGradient
                 colors={['transparent','black' ]}

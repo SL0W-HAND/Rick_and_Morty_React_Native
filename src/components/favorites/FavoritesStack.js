@@ -12,7 +12,7 @@ const FavoritesStack = () => {
             <Stack.Navigator>
 
                 <Stack.Screen 
-                    name='favotites'
+                    name='favorites'
                     component={FavoritesScreen}
                 />
                 <Stack.Screen

@@ -13,7 +13,8 @@ class Http {
     } catch (err) {
       console.log("http get method err", err);
 
-      throw Error(err);
+      //throw Error(err);
+      return err
     }
   }
 

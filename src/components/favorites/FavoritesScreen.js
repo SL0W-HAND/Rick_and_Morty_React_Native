@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {View, Text, FlatList} from 'react-native'
+import {View, FlatList} from 'react-native'
 import Storage from 'Rick_and_Morty_Api/src/libs/storage'
 import FavoriteEmpty from './FavoriteEmpty'
 import CharacterItem from '../items/CharacterItem'

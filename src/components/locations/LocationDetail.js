@@ -43,8 +43,7 @@ export class LocationDetail extends Component {
     }
 
     getCharacter = async (character) => {
-        const response =  await Http.instance.get(character)//asta aqui funciona
-        //console.log(response)
+        const response =  await Http.instance.get(character)
         return response
     }
 

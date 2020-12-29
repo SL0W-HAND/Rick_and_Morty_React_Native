@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {View,Text, Pressable, FlatList, ActivityIndicator, StyleSheet,ScrollView} from 'react-native'
+import {View, Pressable, FlatList, ActivityIndicator, StyleSheet,ScrollView} from 'react-native'
 import Http from 'Rick_and_Morty_Api/src/libs/http'
 import CharacterItem from '../items/CharacterItem'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
