@@ -2,13 +2,18 @@ import React, { Component } from 'react'
 import {View, Text,StyleSheet,ScrollView,FlatList,ActivityIndicator } from 'react-native'
 import CharacterItem from '../items/CharacterItem'
 import Http from 'Rick_and_Morty_Api/src/libs/http'
+import RequestStack from 'Rick_and_Morty_Api/src/libs/request_stack'
 
 
 export class LocationDetail extends Component {
     state = {
         location:{},
         residents:[],
-        loading:true
+        residentsUrls:[],
+        numOfResidents:0,
+        loading:true,
+        loadingMore:false,
+        index:1
     }
 
     getLocation = async() => {
@@ -23,23 +28,37 @@ export class LocationDetail extends Component {
         var getResidents = await new Promise((resolve, reject) => {
 
             var residents = []
+            var residentsUrls = []
             var count = 0
             if (citizen.length == 0) {
                 this.setState({location:location ,residents: residents, loading:false})
                 resolve()
             } else {
-                citizen.forEach(async element => {
+                residentsUrls = RequestStack.instance.arrayTo2DArray2(citizen, 15)
+
+                this.setState({residentsUrls:residentsUrls, numOfResidents: citizen.length})
+
+                residentsUrls[0].forEach(async element => {
+
                     const response =  await Http.instance.get(element)
+
                     residents.push(response)
+
                     count ++
-                    if(citizen.length == count ){
+
+                    if(residentsUrls[0].length == count ){
                         this.setState({location:location ,residents: residents, loading:false})
                         resolve()
                     }
                 })
             }      
         })
-        getResidents
+        try {
+            getResidents
+        } catch (error) {
+            //go back
+        }
+        
     }
 
     getCharacter = async (character) => {
@@ -50,14 +69,49 @@ export class LocationDetail extends Component {
 
     handlePress = (character) =>{
         this.props.navigation.navigate('CharacterDetail',{character})
-    }    
+    }
+    
+    handleLoadMore = async () => {
+        if (this.state.loadingMore == false) {
+            var index = this.state.index
+            
+            if (this.state.residentsUrls.length > index) {
+                this.setState({loadingMore:true})
+                var loadMore = new Promise((resolve,reject) => {
+                    var newCharacters = []
+                    var count = 0
+                   
+                    this.state.residentsUrls[index].forEach(async element => {
+
+                        const response =  await Http.instance.get(element)
+
+                        newCharacters.push(response)
+
+                        count ++
+
+                        if (this.state.residentsUrls[index].length == count) {     
+                            var plusNewCharacters = this.state.residents.concat(newCharacters)
+                            this.setState({index: (index + 1), residents: plusNewCharacters, loadingMore: false})
+                            resolve()
+                        }
+                    })
+                    
+                })
+
+                loadMore
+
+            } else {
+                return null
+            }
+        }
+    }
 
     componentDidMount(){
         this.getLocation()
     }
 
     render() {
-        const {location,residents,loading} = this.state
+        const {location,residents,loading,numOfResidents} = this.state
         
         return (
             <View style={styles.container}>
@@ -74,11 +128,13 @@ export class LocationDetail extends Component {
                         {residents.length == 0
                             ?<Text style={styles.text}>Nobody lives here</Text>
                             :<View>
-                                <Text style={styles.text}>Residents:</Text>
+                                <Text style={styles.text}>Residents: {numOfResidents}</Text>
                                 <FlatList 
                                     showsHorizontalScrollIndicator={false}
                                     style={{ marginLeft:15}}
                                     horizontal={true}
+                                    onEndReached={this.handleLoadMore}
+                                    onEndReachedThreshold={0.5}
                                     data={residents}
                                     keyExtractor={item => item.id.toString()}
                                     renderItem={({ item }) =>

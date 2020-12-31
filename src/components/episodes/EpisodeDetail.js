@@ -2,12 +2,16 @@ import React, { Component } from 'react'
 import {View, ActivityIndicator,ScrollView, StyleSheet,Text,FlatList} from 'react-native'
 import CharacterItem from '../items/CharacterItem'
 import Http from 'Rick_and_Morty_Api/src/libs/http'
+import RequestStack from 'Rick_and_Morty_Api/src/libs/request_stack'
 
 
 export class EpisodeDetail extends Component {
     state ={
         episode:{},
         characters:[],
+        charactersUrls:[],
+        loadingMore:false,
+        index:1,
         loading:true
     }
 
@@ -21,27 +25,76 @@ export class EpisodeDetail extends Component {
 
         var getCharacters = await new Promise((resolve,reject) => {
             var charactersDone = []
+            var charactersUrls = []
             var count = 0
             if (characters.length == 0) {
                 this.setState({episode:episode,characters:charactersDone,loading:false})
             } else {
-                characters.forEach(async element => {
+                charactersUrls = RequestStack.instance.arrayTo2DArray2(characters, 15)
+                
+                this.setState({charactersUrls:charactersUrls})
+                charactersUrls[0].forEach(async element => {
+
                     const response = await Http.instance.get(element)
+                    
                     charactersDone.push(response)
+                    
                     count ++
-                    if (characters.length == count) {
+
+                    if (charactersUrls[0].length == count) {
                         this.setState({episode:episode, characters:charactersDone, loading:false})
                         resolve()
                     }
                 })
             }
         })
-        getCharacters
+        try {
+            getCharacters
+        } catch (error) {
+            //go back
+        }
+        
     }
 
     handlePress = (character) =>{
         this.props.navigation.navigate('CharacterDetail',{character})
     } 
+
+    handleLoadMore = async () => {
+        if (this.state.loadingMore == false) {
+            var index = this.state.index
+            
+            if (this.state.charactersUrls.length > index) {
+                this.setState({loadingMore: true})
+
+                var loadMore = new Promise((resolve,reject) => {
+                    var newCharacters = []
+                    var count = 0
+
+                    this.state.charactersUrls[index].forEach(async element => {
+
+                        const response =  await Http.instance.get(element)
+
+                        newCharacters.push(response)
+
+                        count ++
+
+                        if (this.state.charactersUrls[index].length == count) {
+                            var plusNewCharacters = this.state.characters.concat(newCharacters)
+                            this.setState({index: (index + 1), characters: plusNewCharacters, loadingMore: false})
+                            resolve()
+                        }
+                        
+                    })
+                })
+
+                loadMore
+
+            } else {
+                return null
+            }
+        }
+    }
 
     componentDidMount(){
         this.getEpisode()
@@ -66,6 +119,8 @@ export class EpisodeDetail extends Component {
                                     showsHorizontalScrollIndicator={false}
                                     style={{ marginLeft:15}}
                                     horizontal={true}
+                                    onEndReached={this.handleLoadMore}
+                                    onEndReachedThreshold={0.5}
                                     data={characters}
                                     keyExtractor={item => item.id.toString()}
                                     renderItem={({ item }) =>
