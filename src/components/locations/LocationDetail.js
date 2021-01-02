@@ -119,7 +119,7 @@ export class LocationDetail extends Component {
                 {loading
                     ?<ActivityIndicator 
                             style={styles.loader} 
-                            color="blue" 
+                            color="#FF9800" 
                             size="large"
                      />
                     :<ScrollView>

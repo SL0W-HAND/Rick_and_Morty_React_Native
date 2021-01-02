@@ -99,7 +99,7 @@ export class CharacterScreen extends Component {
         return (
             <View style={styles.container}>
                 {loading 
-                    ? <ActivityIndicator color="white" size="large"/>
+                    ? <ActivityIndicator color="#FF9800"  size="large"/>
                     :null
                 }
                 <FlatList 

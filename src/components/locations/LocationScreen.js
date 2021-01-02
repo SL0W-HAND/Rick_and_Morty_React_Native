@@ -60,7 +60,7 @@ export class LocationScreen extends Component {
         return (
             <View style={styles.container}>
                 {loading 
-                    ?<ActivityIndicator color="white" size="large"/>
+                    ?<ActivityIndicator style={styles.loader} color="#FF9800" size="large"/>
                     :null
                 }
                 <FlatList 
@@ -78,7 +78,7 @@ export class LocationScreen extends Component {
                     }
                 />
                 {loadingMore 
-                    ?<ActivityIndicator color="white" size="large"/>
+                    ?<ActivityIndicator style={styles.loader} color="#FF9800" size="large"/>
                     :null
                 }
                 {error 
@@ -98,6 +98,9 @@ export class LocationScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+    loader:{
+        marginTop:150
+    },
     container:{
         alignItems:"center"
     }

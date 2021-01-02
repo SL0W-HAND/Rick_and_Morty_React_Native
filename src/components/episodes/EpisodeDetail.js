@@ -107,7 +107,8 @@ export class EpisodeDetail extends Component {
             <View>
                {loading
                     ?<ActivityIndicator 
-                            color="blue" 
+                            color="#FF9800" 
+                            style={styles.loader}
                             size="large"
                         />
                     :<ScrollView>
@@ -138,6 +139,9 @@ export class EpisodeDetail extends Component {
 }
 
 const styles = StyleSheet.create({
+    loader:{
+        marginTop:150
+    },
     text:{
         fontFamily:"Segoe UI",
         fontSize:17,
