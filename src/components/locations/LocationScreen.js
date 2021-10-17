@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {View, FlatList, ActivityIndicator, StyleSheet,Pressable} from 'react-native'
 import Http from 'Rick_and_Morty_Api/src/libs/http'
-import SecondItem from '../items/SecondItem'
+import SecondItem from '../items/secondItem'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 

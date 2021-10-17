@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import {View, FlatList, ActivityIndicator, StyleSheet} from 'react-native'
 import Http from 'Rick_and_Morty_Api/src/libs/http'
-import SecondItem from '../items/SecondItem'
+import SecondItem from '../items/secondItem'
 
 
 export class EpisodesScreen extends Component {
